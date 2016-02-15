@@ -1,25 +1,33 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   page.h                                             :+:      :+:    :+:   */
+/*   push_new_page.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 17:03:44 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 14:53:08 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/15 15:45:02 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAGE_H
-# define PAGE_H
+#include "malloc.h"
 
-# include "block_type.h"
+t_page_list		*pages;
 
-typedef struct		s_page
+void	push_new_page(t_page page)
 {
-	t_block_type	type;
-	void			*addr;
-	int				blocks[PAGE_SIZE];
-}					t_page;
+	t_page_list		*lst;
+	t_page_list		new;
 
-#endif
+	new.next = NULL;
+	new.page = page;
+	if (!pages)
+		pages = &new;
+	else
+	{
+		lst = pages;
+		while (lst->next)
+			lst = lst->next;
+		lst->next = &new;
+	}
+}

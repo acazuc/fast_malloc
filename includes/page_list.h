@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:04:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 13:06:59 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/15 15:44:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@ typedef struct s_page_list	t_page_list;
 struct				s_page_list
 {
 	t_page			page;
-	t_page_list		next;
+	t_page_list		*next;
 };
 
 #endif

@@ -1,25 +1,20 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   page.h                                             :+:      :+:    :+:   */
+/*   get_page_size.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 17:03:44 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 14:53:08 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/15 14:57:30 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/15 15:18:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAGE_H
-# define PAGE_H
+#include "malloc.h"
 
-# include "block_type.h"
-
-typedef struct		s_page
+size_t		get_page_size(t_block_type type)
 {
-	t_block_type	type;
-	void			*addr;
-	int				blocks[PAGE_SIZE];
-}					t_page;
-
-#endif
+	if (type == TINY)
+		return (TINY_SIZE * PAGE_SIZE);
+	return (SMALL_SIZE * PAGE_SIZE);
+}

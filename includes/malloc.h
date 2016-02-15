@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/02 17:07:20 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/15 15:13:12 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,7 +14,6 @@
 # define MALLOC_H
 
 # include "../libft/includes/libft.h"
-# include "block_list.h"
 # include "block_type.h"
 # include "define.h"
 # include "prototypes.h"

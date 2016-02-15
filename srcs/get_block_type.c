@@ -1,25 +1,22 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   block_list.h                                       :+:      :+:    :+:   */
+/*   get_block_type.c                                   :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 16:30:55 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/02 17:08:12 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/15 13:40:56 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/15 13:42:22 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef BLOCK_LIST_H
-# define BLOCK_LIST_H
+#include "malloc.h"
 
-typedef struct s_block_list	t_block_list;
-
-struct				s_block_list
+t_block_type	get_block_type(size_t len)
 {
-	void			*addr;
-	char			used;
-	t_block_list	*next;
-};
-
-#endif
+	if (len <= TINY_SIZE)
+		return (TINY);
+	else if (len <= SMALL_SIZE)
+		return (SMALL);
+	return (LARGE);
+}

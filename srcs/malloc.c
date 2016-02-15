@@ -1,26 +1,29 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   page_list.h                                        :+:      :+:    :+:   */
+/*   malloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/02 17:04:31 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 13:06:59 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/15 13:52:33 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#ifndef PAGE_LIST_H
-# define PAGE_LIST_H
+#include "malloc.h"
 
-# include "page.h"
+t_page_list		*pages = NULL;
 
-typedef struct s_page_list	t_page_list;
-
-struct				s_page_list
+void			*malloc(size_t len)
 {
-	t_page			page;
-	t_page_list		next;
-};
+	t_block_type	type;
+	void			*addr;
 
-#endif
+	if (len == 0)
+		return (NULL);
+	type = get_block_type(len);
+	if (!(addr = get_existing_block(type)))
+		if (!(addr = create_new_block(type)))
+			return (NULL);
+	return (addr);
+}

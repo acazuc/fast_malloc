@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:03:44 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/02 17:06:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/15 14:31:09 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,9 +17,9 @@
 
 typedef struct		s_page
 {
-	t_block_list	*blocks;
 	t_block_type	type;
-	char			full;
+	void			*addr;
+	int				blocks[PAGE_SIZE];
 }					t_page;
 
 #endif

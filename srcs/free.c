@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 13:50:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 14:44:54 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -50,7 +50,7 @@ void	free(void *addr)
 			MALLOC_UNLOCK();
 			return ;
 		}
-		prev = lst;
+		prv = lst;
 		lst = lst->next;
 	}
 	MALLOC_UNLOCK();

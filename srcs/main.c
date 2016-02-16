@@ -6,12 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 13:38:29 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 15:35:23 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <stdio.h>
+
+# define SIZE 100000
 
 int		main(void)
 {
@@ -19,26 +21,30 @@ int		main(void)
 	char	*tmp;
 	int		i;
 
-	if (!(str = malloc(sizeof(*str) * 8000)))
+	if (!(str = malloc(sizeof(*str) * SIZE)))
 		exit(1);
 	printf("%p\n", str);
 	i = 0;
-	while (i < 8000)
+	while (i < SIZE)
 	{
 		if (!(tmp = malloc(sizeof(**str) * 2)))
 			exit(1);
-		//printf("%p\n", tmp);
 		tmp[0] = i;
 		tmp[1] = '\0';
 		str[i] = tmp;
+		ft_putnbr(i);
+		ft_putchar('\n');
 		//free(tmp);
 		i++;
 	}
-	/*i = 0;
-	while (i < 1024)
+	i = 0;
+
+	while (i < SIZE)
 	{
-		printf("%s\n", str[i]);
+		if (i % 2)
+			free(str[i]);
 		i++;
-	}*/
+	}
+	show_alloc_mem();
 	return (0);
 }

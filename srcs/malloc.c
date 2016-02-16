@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 13:36:04 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 15:17:19 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,7 +29,6 @@ void			*malloc(size_t len)
 	type = get_block_type(len);
 	if (type == LARGE || !(addr = get_existing_block(type)))
 	{
-		ft_putendl("Creating page");
 		if (!(addr = create_new_block(type, len)))
 		{
 			MALLOC_UNLOCK();

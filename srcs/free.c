@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 13:31:44 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 13:50:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,12 +17,14 @@ pthread_mutex_t	malloc_mutex;
 
 void	free(void *addr)
 {
+	t_page_list	*prv;
 	t_page_list	*lst;
 	int			item;
 
 	if (!addr)
 		return ;
 	MALLOC_LOCK();
+	prv = NULL;
 	lst = pages;
 	while (lst)
 	{
@@ -30,6 +32,10 @@ void	free(void *addr)
 		{
 			if (addr == lst->page.addr)
 			{
+				if (prv)
+					prv->next = lst->next;
+				else
+					pages = lst->next;
 				munmap(lst, lst->page.len);
 				MALLOC_UNLOCK();
 				return ;
@@ -44,6 +50,7 @@ void	free(void *addr)
 			MALLOC_UNLOCK();
 			return ;
 		}
+		prev = lst;
 		lst = lst->next;
 	}
 	MALLOC_UNLOCK();

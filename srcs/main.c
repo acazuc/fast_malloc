@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 15:59:49 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 11:37:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,24 +15,29 @@
 
 int		main(void)
 {
-	char	*str1;
-	char	*str2;
+	char	**str;
+	char	*tmp;
+	int		i;
 
-	if (!(str1 = malloc(sizeof(*str1) * 2)))
-	{
-		ft_putendl("Failed to malloc str1");
+	if (!(str = malloc(sizeof(*str) * 256)))
 		exit(1);
-	}
-	str1[0] = '1';
-	str1[1] = '\0';
-	if (!(str2 = malloc(sizeof(*str2) * 2)))
+	printf("%p\n", str);
+	i = 0;
+	while (i < 256)
 	{
-		ft_putendl("Failed to malloc str2");
-		exit(1);
+		if (!(tmp = malloc(sizeof(**str) * 2)))
+			exit(1);
+		printf("%p\n", tmp);
+		str[i] = tmp;
+		str[i][0] = i;
+		str[i][1] = '\0';
+		i++;
 	}
-	str2[0] = '2';
-	str2[1] = '\0';
-	printf("%s\n", str1);
-   	printf("%s\n", str2);
+	i = 0;
+	while (i < 256)
+	{
+		printf("%s\n", str[i]);
+		i++;
+	}
 	return (0);
 }

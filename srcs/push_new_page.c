@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/15 15:45:02 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 11:28:31 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,20 +14,17 @@
 
 t_page_list		*pages;
 
-void	push_new_page(t_page page)
+void	push_new_page(t_page_list *new)
 {
 	t_page_list		*lst;
-	t_page_list		new;
 
-	new.next = NULL;
-	new.page = page;
 	if (!pages)
-		pages = &new;
+		pages = new;
 	else
 	{
 		lst = pages;
 		while (lst->next)
 			lst = lst->next;
-		lst->next = &new;
+		lst->next = new;
 	}
 }

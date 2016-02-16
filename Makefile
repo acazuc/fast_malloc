@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/15 15:13:01 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/16 11:27:30 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -22,12 +22,13 @@ SRCS_PATH = srcs/
 
 SRCS_NAME = main.c \
 			alloc_page.c \
-			create_new_block.c \
 			get_block_type.c \
 			get_existing_block.c \
 			get_page_size.c \
 			malloc.c \
+			get_block_size.c \
 			push_new_page.c \
+			create_new_block.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

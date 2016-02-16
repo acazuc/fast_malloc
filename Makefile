@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/16 11:27:30 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/16 13:27:05 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -29,6 +29,7 @@ SRCS_NAME = main.c \
 			get_block_size.c \
 			push_new_page.c \
 			create_new_block.c \
+			free.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

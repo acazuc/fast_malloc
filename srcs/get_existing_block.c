@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:51:03 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 10:21:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/16 13:10:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ void			*get_existing_block(t_block_type type)
 	lst = pages;
 	while (lst)
 	{
-		type = lst->page.type;
 		if (lst->page.type == type && (i = get_first_free(&lst->page)) != -1)
 		{
 			lst->page.blocks[i] = 1;

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 15:35:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/21 16:18:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -15,15 +15,58 @@
 
 # define SIZE 100000
 
+int		test0(void)
+{
+	int		i;
+
+	i = 0;
+	while (i < 1024)
+	{
+		i++;
+	}
+	return (0);
+}
+
+int		test1(void)
+{
+	int		i;
+	char	*addr;
+
+	i = 0;
+	while (i < 1024)
+	{
+		addr = malloc(1024);
+		addr[0] = 42;
+		i++;
+	}
+	return (0);
+}
+
+int		test2(void)
+{
+	int		i;
+	char	*addr;
+
+	i = 0;
+	while (i < 1024)
+	{
+		addr = malloc(1024);
+		addr[0] = 42;
+		free(addr);
+		i++;
+	}
+	return (0);
+}
+
 int		main(void)
 {
-	char	**str;
+	test0();
+	/*char	**str;
 	char	*tmp;
 	int		i;
 
 	if (!(str = malloc(sizeof(*str) * SIZE)))
 		exit(1);
-	printf("%p\n", str);
 	i = 0;
 	while (i < SIZE)
 	{
@@ -46,5 +89,5 @@ int		main(void)
 		i++;
 	}
 	show_alloc_mem();
-	return (0);
+	return (0);*/
 }

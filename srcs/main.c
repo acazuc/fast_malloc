@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 11:33:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 11:43:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -73,6 +73,18 @@ int		test3(void)
 	addr3 = realloc(addr1, 128 * M);
 	addr3[127 * M] = 42;
 	ft_putstr(addr3);
+	return (0);
+}
+
+int		test4(void)
+{
+	char	*addr;
+
+	addr = malloc(16);
+	free(NULL);
+	free((void*)addr + 5);
+	if (realloc((void *)addr + 5, 10) == NULL)
+		ft_putstr("Bonjours\n");
 	return (0);
 }
 

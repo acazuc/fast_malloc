@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:49:17 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 11:33:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 11:42:53 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -42,6 +42,7 @@ void	*realloc_small_tiny(t_page_list *lst, void *ptr, size_t len)
 	size_t	i;
 	void	*addr;
 
+	ft_putendl("Reallocing small or tiny");
 	if (len <= get_block_size(lst->page.type))
 	{
 		MALLOC_UNLOCK();
@@ -66,7 +67,10 @@ void	*realloc_small_tiny(t_page_list *lst, void *ptr, size_t len)
 void	*realloc(void *addr, size_t len)
 {
 	t_page_list	*lst;
+	int			item;
 
+	if (!addr)
+		return (NULL);
 	MALLOC_LOCK();
 	lst = g_pages;
 	while (lst)
@@ -75,7 +79,12 @@ void	*realloc(void *addr, size_t len)
 			return (realloc_large(lst, addr, len));
 		else if (lst->page.type != LARGE && addr >= lst->page.addr
 				&& addr <= lst->page.addr + get_page_size(lst->page.type))
-			return (realloc_small_tiny(lst, addr, len));
+		{
+			item = (addr - lst->page.addr) / get_block_size(lst->page.type);
+			if (lst->page.addr + get_block_size(lst->page.type) * item == addr)
+				return (realloc_small_tiny(lst, addr, len));
+			return (NULL);
+		}
 		lst = lst->next;
 	}
 	MALLOC_UNLOCK();

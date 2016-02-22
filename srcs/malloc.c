@@ -6,14 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 15:17:19 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 10:10:36 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*pages = NULL;
-pthread_mutex_t	malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
+t_page_list		*g_pages = NULL;
+pthread_mutex_t	g_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
 
 void			*malloc(size_t len)
 {

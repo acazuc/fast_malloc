@@ -1,30 +1,37 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_new_page.c                                    :+:      :+:    :+:   */
+/*   remove_page.c                                      :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:11:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/22 11:09:43 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/22 11:13:27 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*g_pages;
+t_page_list	*g_pages;
 
-void	push_new_page(t_page_list *new)
+void	remove_page(t_page_list *page)
 {
-	t_page_list		*lst;
+	t_page_list	*prv;
+	t_page_list	*lst;
 
-	if (!g_pages)
-		g_pages = new;
-	else
+	prv = NULL;
+	lst = g_pages;
+	while (lst)
 	{
-		lst = g_pages;
-		while (lst->next)
-			lst = lst->next;
-		lst->next = new;
+		if (lst == page)
+		{
+			if (!prv)
+				g_pages = lst->next;
+			else
+				prv->next = lst->next;
+			return ;
+		}
+		prv = lst;
+		lst = lst->next;
 	}
 }

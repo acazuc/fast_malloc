@@ -6,48 +6,58 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 14:44:54 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 10:14:25 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*pages;
-pthread_mutex_t	malloc_mutex;
+t_page_list		*g_pages;
+pthread_mutex_t	g_malloc_mutex;
 
-void	free(void *addr)
+static int		case_large(void *addr, t_page_list *prv, t_page_list *lst)
+{
+	if (addr == lst->page.addr)
+	{
+		if (prv)
+			prv->next = lst->next;
+		else
+			g_pages = lst->next;
+		munmap(lst, lst->page.len);
+		MALLOC_UNLOCK();
+		return (1);
+	}
+	return (0);
+}
+
+static void		case_else(void *addr, t_page_list *lst)
+{
+	int			item;
+
+	item = (addr - lst->page.addr) / get_block_size(lst->page.type);
+	if (lst->page.addr + get_block_size(lst->page.type) * item == addr)
+		lst->page.blocks[item] = 0;
+	MALLOC_UNLOCK();
+}
+
+void			free(void *addr)
 {
 	t_page_list	*prv;
 	t_page_list	*lst;
-	int			item;
 
 	if (!addr)
 		return ;
 	MALLOC_LOCK();
 	prv = NULL;
-	lst = pages;
+	lst = g_pages;
 	while (lst)
 	{
-		if (lst->page.type == LARGE)
+		if (lst->page.type == LARGE && case_large(addr, prv, lst))
+			return ;
+		else if (lst->page.type != LARGE && addr >= lst->page.addr
+				&& addr <= lst->page.addr + get_page_size(lst->page.type))
 		{
-			if (addr == lst->page.addr)
-			{
-				if (prv)
-					prv->next = lst->next;
-				else
-					pages = lst->next;
-				munmap(lst, lst->page.len);
-				MALLOC_UNLOCK();
-				return ;
-			}
-		}
-		else if (addr >= lst->page.addr && addr <= lst->page.addr + get_page_size(lst->page.type))
-		{
-			item = (addr - lst->page.addr) / get_block_size(lst->page.type);
-			if (lst->page.addr + get_block_size(lst->page.type) * item == addr)
-				lst->page.blocks[item] = 0;
-			lst->page.blocks[item] = 0;
-			MALLOC_UNLOCK();
+			case_else(addr, lst);
 			return ;
 		}
 		prv = lst;

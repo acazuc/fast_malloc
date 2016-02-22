@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/02/21 15:41:49 by acazuc           ###   ########.fr        #
+#    Updated: 2016/02/22 11:21:06 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,6 +31,9 @@ SRCS_NAME = main.c \
 			create_new_block.c \
 			free.c \
 			show_alloc_mem.c \
+			show_alloc_mem_2.c \
+			remove_page.c \
+			realloc.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 

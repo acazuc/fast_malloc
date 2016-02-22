@@ -1,30 +1,32 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   push_new_page.c                                    :+:      :+:    :+:   */
+/*   show_alloc_mem_2.c                                 :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:11:21 by acazuc           ###   ########.fr       */
+/*   Created: 2016/02/22 10:45:57 by acazuc            #+#    #+#             */
+/*   Updated: 2016/02/22 10:47:34 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*g_pages;
-
-void	push_new_page(t_page_list *new)
+void		putaddrchar(char c)
 {
-	t_page_list		*lst;
-
-	if (!g_pages)
-		g_pages = new;
+	if (c > 9)
+		ft_putchar(c - 10 + 'a');
 	else
+		ft_putchar(c + '0');
+}
+
+void		putaddr(size_t addr)
+{
+	if ((size_t)addr > 15)
 	{
-		lst = g_pages;
-		while (lst->next)
-			lst = lst->next;
-		lst->next = new;
+		putaddr(addr / 16);
+		putaddr(addr % 16);
 	}
+	else
+		putaddrchar((char)(addr % 16));
 }

@@ -6,35 +6,34 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 14:23:47 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 15:15:47 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 10:46:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*pages;
-pthread_mutex_t	malloc_mutex;
+t_page_list		*g_pages;
+pthread_mutex_t	g_malloc_mutex;
 
-static void		putaddrchar(char c)
+static void		print_block(size_t start, size_t end, size_t len)
 {
-	if (c > 9)
-		ft_putchar(c - 10 + 'a');
-	else
-		ft_putchar(c + '0');
+	ft_putstr("0x");
+	putaddr(start);
+	ft_putstr(" - 0x");
+	putaddr(end);
+	ft_putstr(" : ");
+	ft_putnbr(len);
+	ft_putendl(" octets");
 }
 
-static void		putaddr(size_t addr)
+static void		c_e(void **start, void *end, size_t *total)
 {
-	if ((size_t)addr > 15)
-	{
-		putaddr(addr / 16);
-		putaddr(addr % 16);
-	}
-	else
-		putaddrchar((char)(addr % 16));
+	*total += end - *start;
+	print_block((size_t)*start, (size_t)end, (size_t)(end - *start));
+	*start = NULL;
 }
 
-static void		print_page(t_page *page)
+static void		print_page(t_page *page, size_t *total)
 {
 	void	*start;
 	void	*end;
@@ -42,59 +41,32 @@ static void		print_page(t_page *page)
 
 	if (page->type == LARGE)
 	{
-		ft_putstr("0x");
-		putaddr((size_t)page->addr);
-		ft_putstr(" - 0x");
-		putaddr((size_t)(page->addr + page->len));
-		ft_putstr(" : ");
-		ft_putnbr(page->len);
-		ft_putendl(" octets");
+		print_block((size_t)page->addr, (size_t)(page->addr + page->len)
+				, page->len);
 		return ;
 	}
 	start = NULL;
 	end = NULL;
-	i = 0;
-	while (i < PAGE_SIZE)
+	i = -1;
+	while (++i < PAGE_SIZE)
 	{
-		if (page->blocks[i] == 1)
-		{
-			if (!start)
-				start = page->addr + i * get_block_size(page->type);
-		}
-		else if (start)
-		{
-			end = page->addr + i * get_block_size(page->type);
-			ft_putstr("0x");
-			putaddr((size_t)start);
-			ft_putstr(" - 0x");
-			putaddr((size_t)end);
-			ft_putstr(" : ");
-			ft_putnbr(end - start);
-			ft_putendl(" octets");
-			start = NULL;
-		}
-		i++;
+		if (page->blocks[i] == 1 && !start)
+			start = page->addr + i * get_block_size(page->type);
+		else if (page->blocks[i] == 0 && start)
+			c_e(&start, page->addr + i * get_block_size(page->type), total);
 	}
 	if (start)
-	{
-		end = page->addr + i * get_block_size(page->type);
-		ft_putstr("0x");
-		putaddr((size_t)start);
-		ft_putstr(" - 0x");
-		putaddr((size_t)end);
-		ft_putstr(" : ");
-		ft_putnbr(end - start);
-		ft_putendl(" octets");
-		start = NULL;
-	}
+		c_e(&start, page->addr + i * get_block_size(page->type), total);
 }
 
-void	show_alloc_mem(void)
+void			show_alloc_mem(void)
 {
 	t_page_list		*lst;
+	size_t			total;
 
 	MALLOC_LOCK();
-	lst = pages;
+	total = 0;
+	lst = g_pages;
 	while (lst)
 	{
 		if (lst->page.type == TINY)
@@ -104,8 +76,11 @@ void	show_alloc_mem(void)
 		ft_putstr(" : 0x");
 		putaddr((size_t)lst->page.addr);
 		ft_putchar('\n');
-		print_page(&lst->page);
+		print_page(&lst->page, &total);
 		lst = lst->next;
 	}
+	ft_putstr("Total: ");
+	ft_putul(total);
+	ft_putchar('\n');
 	MALLOC_UNLOCK();
 }

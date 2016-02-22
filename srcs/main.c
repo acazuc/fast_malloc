@@ -6,14 +6,14 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:01:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 11:33:55 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 #include <stdio.h>
 
-# define SIZE 100000
+# define SIZE 1000
 
 int		test0(void)
 {
@@ -58,9 +58,27 @@ int		test2(void)
 	return (0);
 }
 
+# define M (1024 * 1024)
+
+int		test3(void)
+{
+	char	*addr1;
+	char	*addr2;
+	char	*addr3;
+
+	addr1 = malloc(16 * M);
+	ft_strcpy(addr1, "Bonjours\n");
+	ft_putstr(addr1);
+	addr2 = malloc(16 * M);
+	addr3 = realloc(addr1, 128 * M);
+	addr3[127 * M] = 42;
+	ft_putstr(addr3);
+	return (0);
+}
+
 int		main(void)
 {
-	test0();
+	test3();
 	/*char	**str;
 	char	*tmp;
 	int		i;
@@ -75,8 +93,6 @@ int		main(void)
 		tmp[0] = i;
 		tmp[1] = '\0';
 		str[i] = tmp;
-		ft_putnbr(i);
-		ft_putchar('\n');
 		//free(tmp);
 		i++;
 	}

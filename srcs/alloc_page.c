@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:11:23 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/21 16:19:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 10:14:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-static void		init_0(t_page *page)
+static void			init_0(t_page *page)
 {
 	int		i;
 
@@ -28,7 +28,7 @@ t_page_list			*alloc_page(t_block_type type, size_t len)
 {
 	t_page_list	*new;
 
-	if (!(new = mmap(0, len + sizeof(*new),  PROT_READ | PROT_WRITE
+	if (!(new = mmap(0, len + sizeof(*new), PROT_READ | PROT_WRITE
 					, MAP_ANON | MAP_PRIVATE, -1, 0)))
 		return (NULL);
 	new->page.type = type;

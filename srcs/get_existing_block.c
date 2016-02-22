@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:51:03 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/16 13:10:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 10:15:41 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*pages;
+t_page_list		*g_pages;
 
 static int		get_first_free(t_page *page)
 {
@@ -33,7 +33,7 @@ void			*get_existing_block(t_block_type type)
 	t_page_list		*lst;
 	int				i;
 
-	lst = pages;
+	lst = g_pages;
 	while (lst)
 	{
 		if (lst->page.type == type && (i = get_first_free(&lst->page)) != -1)

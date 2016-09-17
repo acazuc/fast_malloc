@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 14:23:47 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:46:42 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/02/22 13:29:47 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -41,6 +41,7 @@ static void		print_page(t_page *page, size_t *total)
 
 	if (page->type == LARGE)
 	{
+		*total += page->len - sizeof(t_page_list);
 		print_block((size_t)page->addr, (size_t)(page->addr + page->len)
 				, page->len);
 		return ;

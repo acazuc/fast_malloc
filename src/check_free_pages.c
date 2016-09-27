@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 10:38:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/27 11:10:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 11:13:29 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,7 +27,7 @@ static int	is_page_free(t_page *page)
 	return (1);
 }
 
-void	check_free_pages(t_block_type type)
+void		check_free_pages(t_block_type type)
 {
 	t_page_list		*lst;
 	int				one_free;

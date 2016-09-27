@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/27 11:06:56 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 11:14:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,9 @@ void						putaddrchar(char c);
 void						putaddr(size_t addr);
 void						remove_page(t_page_list *page);
 void						check_free_pages(t_block_type type);
+int							test3(void);
+int							test4(void);
+int							test5(void);
 
 enum						e_block_type
 {

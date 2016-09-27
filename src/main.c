@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:32:46 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/17 13:59:59 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 11:14:17 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,10 +14,6 @@
 #include <stdio.h>
 
 #define SIZE 1000
-
-int test3(void);
-int test4(void);
-int test5(void);
 
 int		test0(void)
 {

@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/17 13:59:15 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/27 11:05:59 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -18,9 +18,9 @@ CC = gcc
 
 CFLAGS = -Wall -Wextra -Werror
 
-INCLUDES_PATH = includes/
+INCLUDES_PATH = include/
 
-SRCS_PATH = srcs/
+SRCS_PATH = src/
 
 SRCS_NAME = alloc_page.c \
 			get_block_type.c \
@@ -35,10 +35,11 @@ SRCS_NAME = alloc_page.c \
 			show_alloc_mem_2.c \
 			remove_page.c \
 			realloc.c \
+			check_free_pages.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
-OBJS_PATH = objs/
+OBJS_PATH = obj/
 
 OBJS_NAME = $(SRCS_NAME:.c=.o)
 

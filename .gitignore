@@ -1,4 +1,4 @@
 *.swp
-objs
+obj
 libft
-malloc
+libft_malloc_x86_64_Darwin.so

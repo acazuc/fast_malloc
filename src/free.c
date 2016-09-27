@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:14:25 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/27 11:06:42 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,10 @@ static void		case_else(void *addr, t_page_list *lst)
 
 	item = (addr - lst->page.addr) / get_block_size(lst->page.type);
 	if (lst->page.addr + get_block_size(lst->page.type) * item == addr)
+	{
 		lst->page.blocks[item] = 0;
+		check_free_pages(lst->page.type);
+	}
 	MALLOC_UNLOCK();
 }
 

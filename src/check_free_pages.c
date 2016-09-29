@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 10:38:52 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/29 14:56:26 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/29 16:48:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,6 @@ void		check_free_pages(t_block_type type)
 	t_page_list		*lst;
 	int				one_free;
 
-	return;
 	one_free = 0;
 	lst = g_pages;
 	while (lst)

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:11:23 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:14:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/29 15:01:11 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -28,8 +28,8 @@ t_page_list			*alloc_page(t_block_type type, size_t len)
 {
 	t_page_list	*new;
 
-	if (!(new = mmap(0, len + sizeof(*new), PROT_READ | PROT_WRITE
-					, MAP_ANON | MAP_PRIVATE, -1, 0)))
+	if (!(new = mmap(0, getpagesize_mult(len + sizeof(*new))
+					, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
 		return (NULL);
 	new->page.type = type;
 	new->page.len = len + sizeof(*new);

@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:10:36 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/29 15:30:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -14,6 +14,15 @@
 
 t_page_list		*g_pages = NULL;
 pthread_mutex_t	g_malloc_mutex = PTHREAD_MUTEX_INITIALIZER;
+
+static void		*return_enomem(void *ptr)
+{
+	if (ptr == NULL)
+		ft_putendl("returning null");
+	if (ptr == NULL)
+		errno = ENOMEM;
+	return (ptr);
+}
 
 void			*malloc(size_t len)
 {
@@ -24,7 +33,7 @@ void			*malloc(size_t len)
 	if (len == 0)
 	{
 		MALLOC_UNLOCK();
-		return (NULL);
+		return (return_enomem(NULL));
 	}
 	type = get_block_type(len);
 	if (type == LARGE || !(addr = get_existing_block(type)))
@@ -32,9 +41,9 @@ void			*malloc(size_t len)
 		if (!(addr = create_new_block(type, len)))
 		{
 			MALLOC_UNLOCK();
-			return (NULL);
+			return (return_enomem(NULL));
 		}
 	}
 	MALLOC_UNLOCK();
-	return (addr);
+	return (return_enomem(addr));
 }

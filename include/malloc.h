@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/27 11:14:11 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/29 15:31:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -16,6 +16,7 @@
 # include <sys/mman.h>
 # include <unistd.h>
 # include <pthread.h>
+# include <errno.h>
 
 # include "../libft/includes/libft.h"
 
@@ -34,6 +35,7 @@ typedef struct s_page		t_page;
 void						free(void *ptr);
 void						*malloc(size_t size);
 void						*realloc(void *ptr, size_t size);
+void						*calloc(size_t count, size_t size);
 void						show_alloc_mem(void);
 void						show_alloc_hex_mem(void);
 t_page_list					*alloc_page(t_block_type type, size_t len);
@@ -47,9 +49,7 @@ void						putaddrchar(char c);
 void						putaddr(size_t addr);
 void						remove_page(t_page_list *page);
 void						check_free_pages(t_block_type type);
-int							test3(void);
-int							test4(void);
-int							test5(void);
+size_t						getpagesize_mult(size_t len);
 
 enum						e_block_type
 {

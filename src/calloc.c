@@ -1,24 +1,23 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   create_new_block.c                                 :+:      :+:    :+:   */
+/*   calloc.c                                           :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
-/*   Created: 2016/02/16 11:24:50 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/29 15:29:26 by acazuc           ###   ########.fr       */
+/*   Created: 2016/09/29 15:31:22 by acazuc            #+#    #+#             */
+/*   Updated: 2016/09/29 15:32:33 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		*create_new_block(t_block_type type, size_t len)
+void	*calloc(size_t count, size_t size)
 {
-	t_page_list		*new;
+	char	*addr;
 
-	if (!(new = alloc_page(type, type == LARGE ? len : get_page_size(type))))
-		return (NULL);
-	new->page.blocks[0] = 1;
-	push_new_page(new);
-	return (new->page.addr);
+	addr = malloc(count * size);
+	if (addr)
+		ft_bzero(addr, count * size);
+	return (addr);
 }

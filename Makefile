@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2016/09/27 11:05:59 by acazuc           ###   ########.fr        #
+#    Updated: 2016/09/29 15:32:41 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -36,6 +36,8 @@ SRCS_NAME = alloc_page.c \
 			remove_page.c \
 			realloc.c \
 			check_free_pages.c \
+			getpagesize_mult.c \
+			calloc.c \
 
 SRCS = $(addprefix $(SRCS_PATH), $(SRCS_NAME))
 
@@ -53,9 +55,10 @@ test:
 	$(CC) $(CFLAGS) $(SRCS_PATH)main.c $(SRCS_PATH)main_2.c -o test -I includes -L libft -lft -L . -lft_malloc_$(HOSTTYPE)
 
 $(NAME): $(OBJS)
-	@make -C libft/
+	@make -C libft
 	@echo " - Making $(NAME)"
 	@$(CC) -shared $(CFLAGS) -o $(NAME) $^ $(LIBRARY)
+	@ln -sf $(NAME) libft_malloc.so
 
 $(OBJS_PATH)%.o: $(SRCS_PATH)%.c
 	@echo " - Compiling $<"
@@ -65,14 +68,15 @@ odir:
 	@mkdir -p $(OBJS_PATH)
 
 clean:
-	@make -C libft/ clean
+	@make -C libft clean
 	@echo " - Cleaning objs"
 	@rm -f $(OBJS)
 
 fclean: clean
-	@make -C libft/ fclean
+	@make -C libft fclean
 	@echo " - Cleaning executable"
 	@rm -f $(NAME)
+	@rm -f libft_malloc.so
 
 re: fclean all
 

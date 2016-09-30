@@ -2,3 +2,4 @@
 obj
 libft
 libft_malloc_x86_64_Darwin.so
+libft_malloc.so

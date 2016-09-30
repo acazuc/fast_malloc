@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:49:17 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/29 20:01:13 by acazuc           ###   ########.fr       */
+/*   Updated: 2016/09/30 12:15:45 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -75,9 +75,9 @@ void		*realloc(void *addr, size_t len)
 	t_page_list	*lst;
 	int			item;
 
-	MALLOC_LOCK();
 	if (addr == NULL)
 		return (malloc(len));
+	MALLOC_LOCK();
 	lst = g_pages;
 	while (lst)
 	{

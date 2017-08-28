@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 14:23:47 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/29 16:48:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 20:02:10 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -36,7 +36,6 @@ static void			c_e(void **start, void *end, size_t *total)
 static void			print_page(t_page *page, size_t *total)
 {
 	void	*start;
-	void	*end;
 	int		i;
 
 	if (page->type == LARGE)
@@ -47,7 +46,6 @@ static void			print_page(t_page *page, size_t *total)
 		return ;
 	}
 	start = NULL;
-	end = NULL;
 	i = -1;
 	while (++i < PAGE_SIZE)
 	{

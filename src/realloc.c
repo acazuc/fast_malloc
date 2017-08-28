@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:49:17 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/30 12:15:45 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 21:40:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -18,7 +18,10 @@ pthread_mutex_t	g_malloc_mutex;
 static void	*return_enomem(void *addr)
 {
 	if (addr == NULL)
+	{
+		ft_putstr("realloc enomem");
 		errno = ENOMEM;
+	}
 	return (addr);
 }
 
@@ -94,5 +97,5 @@ void		*realloc(void *addr, size_t len)
 		lst = lst->next;
 	}
 	MALLOC_UNLOCK();
-	return (return_enomem(NULL));
+	return (NULL);
 }

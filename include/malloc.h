@@ -6,27 +6,30 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/29 15:31:15 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 20:47:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #ifndef MALLOC_H
 # define MALLOC_H
 
+# ifndef _GNU_SOURCE
+#  define _GNU_SOURCE
+# endif
 # include <sys/mman.h>
 # include <unistd.h>
 # include <pthread.h>
 # include <errno.h>
 
-# include "../libft/includes/libft.h"
+# include "../libft/include/libft.h"
 
 # define PAGE_SIZE 128
 
 # define TINY_SIZE 128
 # define SMALL_SIZE 1024
 
-# define MALLOC_LOCK() pthread_mutex_lock(&g_malloc_mutex)
-# define MALLOC_UNLOCK() pthread_mutex_unlock(&g_malloc_mutex)
+# define MALLOC_LOCK() pthread_mutex_lock(&g_malloc_mutex);
+# define MALLOC_UNLOCK() pthread_mutex_unlock(&g_malloc_mutex);
 
 typedef enum e_block_type	t_block_type;
 typedef struct s_page_list	t_page_list;
@@ -63,7 +66,7 @@ struct						s_page
 	t_block_type			type;
 	size_t					len;
 	void					*addr;
-	int						blocks[PAGE_SIZE];
+	char						blocks[PAGE_SIZE];
 };
 
 struct						s_page_list

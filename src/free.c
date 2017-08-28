@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2016/09/30 12:16:33 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 20:28:52 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -57,7 +57,7 @@ void			free(void *addr)
 	{
 		if (lst->page.type == LARGE && case_large(addr, prv, lst))
 			return ;
-		else if (lst->page.type != LARGE && addr >= lst->page.addr
+		if (lst->page.type != LARGE && addr >= lst->page.addr
 				&& addr <= lst->page.addr + get_page_size(lst->page.type))
 		{
 			case_else(addr, lst);

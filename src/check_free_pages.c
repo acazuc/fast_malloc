@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 10:38:52 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:04:38 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:22:18 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -43,7 +43,7 @@ void check_free_pages(enum block_type type)
 					prv->next = lst->next;
 				else
 					g_pages[type] = lst->next;
-				//munmap(lst, lst->page.page_len);
+				munmap(lst, lst->page.page_len);
 				return;
 			}
 		}

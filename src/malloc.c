@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:02:16 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:43:24 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -29,10 +29,6 @@ void *malloc(size_t len)
 			return (NULL);
 		}
 	}
-	if (type == TINY)
-		ft_putstr("TINY\n");
-	else if (type == SMALL)
-		ft_putstr("SMALL\n");
 	MALLOC_UNLOCK();
 	return (addr);
 }

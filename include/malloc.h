@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 00:44:14 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:42:46 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -32,7 +32,7 @@
 # define MALLOC_LOCK() pthread_mutex_lock(&g_malloc_mutex);
 # define MALLOC_UNLOCK() pthread_mutex_unlock(&g_malloc_mutex);
 
-enum						block_type
+enum block_type
 {
 	TINY = 0,
 	SMALL,

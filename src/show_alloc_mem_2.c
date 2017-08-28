@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:45:57 by acazuc            #+#    #+#             */
-/*   Updated: 2016/02/22 10:47:34 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 22:27:58 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-void		putaddrchar(char c)
+void putaddrchar(char c)
 {
 	if (c > 9)
 		ft_putchar(c - 10 + 'a');
@@ -20,7 +20,7 @@ void		putaddrchar(char c)
 		ft_putchar(c + '0');
 }
 
-void		putaddr(size_t addr)
+void putaddr(size_t addr)
 {
 	if ((size_t)addr > 15)
 	{
@@ -28,5 +28,7 @@ void		putaddr(size_t addr)
 		putaddr(addr % 16);
 	}
 	else
+	{
 		putaddrchar((char)(addr % 16));
+	}
 }

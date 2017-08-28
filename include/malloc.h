@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 20:47:43 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 00:44:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -17,62 +17,60 @@
 #  define _GNU_SOURCE
 # endif
 # include <sys/mman.h>
-# include <unistd.h>
 # include <pthread.h>
+# include <unistd.h>
+# include <stdint.h>
 # include <errno.h>
 
 # include "../libft/include/libft.h"
 
-# define PAGE_SIZE 128
+# define PAGE_SIZE 126
 
 # define TINY_SIZE 128
-# define SMALL_SIZE 1024
+# define SMALL_SIZE 1006
 
 # define MALLOC_LOCK() pthread_mutex_lock(&g_malloc_mutex);
 # define MALLOC_UNLOCK() pthread_mutex_unlock(&g_malloc_mutex);
 
-typedef enum e_block_type	t_block_type;
-typedef struct s_page_list	t_page_list;
-typedef struct s_page		t_page;
-
-void						free(void *ptr);
-void						*malloc(size_t size);
-void						*realloc(void *ptr, size_t size);
-void						*calloc(size_t count, size_t size);
-void						show_alloc_mem(void);
-void						show_alloc_hex_mem(void);
-t_page_list					*alloc_page(t_block_type type, size_t len);
-size_t						get_page_size(t_block_type type);
-void						push_new_page(t_page_list *page);
-t_block_type				get_block_type(size_t len);
-void						*get_existing_block(t_block_type type);
-size_t						get_block_size(t_block_type type);
-void						*create_new_block(t_block_type t, size_t l);
-void						putaddrchar(char c);
-void						putaddr(size_t addr);
-void						remove_page(t_page_list *page);
-void						check_free_pages(t_block_type type);
-size_t						getpagesize_mult(size_t len);
-
-enum						e_block_type
+enum						block_type
 {
-	TINY,
+	TINY = 0,
 	SMALL,
 	LARGE
 };
 
-struct						s_page
+struct page
 {
-	t_block_type			type;
-	size_t					len;
-	void					*addr;
-	char						blocks[PAGE_SIZE];
+	enum block_type type;
+	size_t len;
+	size_t page_len;
+	void *addr;
+	char blocks[PAGE_SIZE];
 };
 
-struct						s_page_list
+struct page_list
 {
-	t_page					page;
-	t_page_list				*next;
+	struct page page;
+	struct page_list *next;
 };
+
+void free(void *ptr);
+void *malloc(size_t size);
+void *realloc(void *ptr, size_t size);
+void *calloc(size_t count, size_t size);
+void show_alloc_mem(void);
+void show_alloc_hex_mem(void);
+struct page_list *alloc_page(enum block_type type, size_t len);
+size_t get_page_size(enum block_type type);
+void push_new_page(struct page_list *page);
+enum block_type get_block_type(size_t len);
+void *get_existing_block(enum block_type type);
+size_t get_block_size(enum block_type type);
+void *create_new_block(enum block_type type, size_t l);
+void putaddrchar(char c);
+void putaddr(size_t addr);
+void remove_page(struct page_list *page, enum block_type type);
+void check_free_pages(enum block_type type);
+size_t getpagesize_mult(size_t len);
 
 #endif

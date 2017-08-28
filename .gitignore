@@ -1,6 +1,4 @@
 *.swp
 obj
 libft
-libft_malloc_x86_64_Darwin.so
-libft_malloc.so
-libft_malloc_x86_64_Linux.so
+libft_malloc*

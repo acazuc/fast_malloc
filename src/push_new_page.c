@@ -6,21 +6,22 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 20:38:55 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/28 23:09:00 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*g_pages;
+struct page_list *g_pages[3];
 
-void	push_new_page(t_page_list *new)
+void push_new_page(struct page_list *new)
 {
-	if (!g_pages)
+	enum block_type type = new->page.type;
+	if (!g_pages[type])
 	{
-		g_pages = new;
+		g_pages[type] = new;
 		return;
 	}
-	new->next = g_pages;
-	g_pages = new;
+	new->next = g_pages[type];
+	g_pages[type] = new;
 }

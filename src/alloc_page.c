@@ -6,21 +6,21 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:11:23 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 20:44:18 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:14:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list			*alloc_page(t_block_type type, size_t len)
+struct page_list *alloc_page(enum block_type type, size_t len)
 {
-	t_page_list	*new;
-
-	if (!(new = mmap(0, getpagesize_mult(len + sizeof(*new))
-					, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
+	struct page_list *new;
+	size_t size = getpagesize_mult(len + sizeof(*new));
+	if (!(new = mmap(0, size, PROT_READ | PROT_WRITE, MAP_ANON | MAP_PRIVATE, -1, 0)))
 		return (NULL);
 	new->page.type = type;
-	new->page.len = len + sizeof(*new);
+	new->page.len = len;
+	new->page.page_len = size;
 	new->page.addr = new;
 	new->page.addr += sizeof(*new);
 	new->next = NULL;

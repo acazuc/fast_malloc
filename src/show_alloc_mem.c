@@ -6,16 +6,16 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 14:23:47 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 20:02:10 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:14:39 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-t_page_list		*g_pages;
-pthread_mutex_t	g_malloc_mutex;
-
-static void			print_block(size_t start, size_t end, size_t len)
+struct page_list *g_pages[3];
+pthread_mutex_t g_malloc_mutex;
+/*
+static void print_block(size_t start, size_t end, size_t len)
 {
 	ft_putstr("0x");
 	putaddr(start);
@@ -26,28 +26,25 @@ static void			print_block(size_t start, size_t end, size_t len)
 	ft_putendl(" octets");
 }
 
-static void			c_e(void **start, void *end, size_t *total)
+static void c_e(void **start, void *end, size_t *total)
 {
 	*total += end - *start;
 	print_block((size_t)*start, (size_t)end, (size_t)(end - *start));
 	*start = NULL;
 }
 
-static void			print_page(t_page *page, size_t *total)
+static void print_page(struct page *page, size_t *total)
 {
-	void	*start;
-	int		i;
-
 	if (page->type == LARGE)
 	{
-		*total += page->len - sizeof(t_page_list);
+		*total += page->len - sizeof(struct page_list);
 		print_block((size_t)page->addr, (size_t)(page->addr + page->len)
 				, page->len);
 		return ;
 	}
-	start = NULL;
-	i = -1;
-	while (++i < PAGE_SIZE)
+	void *start = NULL;
+	uint32_t i;
+	for (i = 0; i < PAGE_SIZE; ++i)
 	{
 		if (page->blocks[i] == 1 && !start)
 			start = page->addr + i * get_block_size(page->type);
@@ -58,15 +55,11 @@ static void			print_page(t_page *page, size_t *total)
 		c_e(&start, page->addr + i * get_block_size(page->type), total);
 }
 
-static t_page_list	*try_push(size_t min)
+static struct page_list *try_push(size_t min)
 {
-	t_page_list		*lowest;
-	t_page_list		*lst;
-	size_t			lowest_val;
-
-	lowest = NULL;
-	lst = g_pages;
-	lowest_val = -1;
+	struct page_list *lowest = NULL;
+	struct page_list *lst = g_pages;
+	size_t lowest_val = -1;
 	while (lst)
 	{
 		if ((lowest_val == 0 || (size_t)lst < lowest_val) && (size_t)lst > min)
@@ -104,4 +97,4 @@ void				show_alloc_mem(void)
 	ft_putul(total);
 	ft_putchar('\n');
 	MALLOC_UNLOCK();
-}
+}*/

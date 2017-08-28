@@ -6,7 +6,7 @@
 #    By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2015/11/25 06:50:12 by acazuc            #+#    #+#              #
-#    Updated: 2017/08/28 20:39:15 by acazuc           ###   ########.fr        #
+#    Updated: 2017/08/29 01:14:33 by acazuc           ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -50,9 +50,6 @@ OBJS = $(addprefix $(OBJS_PATH), $(OBJS_NAME))
 LIBRARY = -L libft/ -lft -lpthread
 
 all: odir $(NAME)
-
-test:
-	$(CC) $(CFLAGS) $(SRCS_PATH)main.c $(SRCS_PATH)main_2.c -o test -I includes -L libft -lft -L . -lft_malloc_$(HOSTTYPE)
 
 $(NAME): $(OBJS)
 	@make -C libft

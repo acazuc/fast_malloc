@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 17:11:23 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:14:03 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:47:49 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -24,7 +24,7 @@ struct page_list *alloc_page(enum block_type type, size_t len)
 	new->page.addr = new;
 	new->page.addr += sizeof(*new);
 	new->next = NULL;
-	if (type == TINY || type == SMALL)
+	if (type == TINY || type == SMALL || type == MEDIUM)
 		ft_memset(new->page.blocks, 0, sizeof(new->page.blocks));
 	return (new);
 }

@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 10:49:17 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 00:27:23 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:50:38 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 pthread_mutex_t g_malloc_mutex;
 
 static size_t min(size_t a, size_t b)
@@ -35,7 +35,7 @@ static void *realloc_large(struct page_list *lst, void *ptr, size_t len)
 	return (addr);
 }
 
-static void *realloc_small_tiny(struct page_list *lst, void *ptr, size_t len)
+static void *realloc_other(struct page_list *lst, void *ptr, size_t len)
 {
 	void	*addr;
 	if (len <= get_block_size(lst->page.type))
@@ -68,7 +68,7 @@ static void *realloc_test_large(void *addr, size_t len)
 	return (NULL);
 }
 
-static void *realloc_test_tiny_small(void *addr, size_t len, enum block_type type)
+static void *realloc_test_other(void *addr, size_t len, enum block_type type)
 {
 	size_t page_size = get_page_size(type);
 	size_t block_size = get_block_size(type);
@@ -78,7 +78,7 @@ static void *realloc_test_tiny_small(void *addr, size_t len, enum block_type typ
 		if (addr >= lst->page.addr && addr <= lst->page.addr + page_size)
 		{
 			if ((addr - lst->page.addr) % block_size == 0)
-				return (realloc_small_tiny(lst, addr, len));
+				return (realloc_other(lst, addr, len));
 		}
 		lst = lst->next;
 	}
@@ -98,9 +98,11 @@ void *realloc(void *addr, size_t len)
 	void *ret;
 	if ((ret = realloc_test_large(addr, len)))
 		goto end;
-	if ((ret = realloc_test_tiny_small(addr, len, TINY)))
+	if ((ret = realloc_test_other(addr, len, TINY)))
 		goto end;
-	if ((ret = realloc_test_tiny_small(addr, len, SMALL)))
+	if ((ret = realloc_test_other(addr, len, SMALL)))
+		goto end;
+	if ((ret = realloc_test_other(addr, len, MEDIUM)))
 		goto end;
 	ret = NULL;
 end:

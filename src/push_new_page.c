@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 15:10:28 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 23:09:00 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:49:51 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 
 void push_new_page(struct page_list *new)
 {

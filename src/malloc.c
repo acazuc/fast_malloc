@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:39:20 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:43:24 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:55:15 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3] = {NULL, NULL, NULL};
+struct page_list *g_pages[4] = {NULL, NULL, NULL, NULL};
 pthread_mutex_t g_malloc_mutex = PTHREAD_RECURSIVE_MUTEX_INITIALIZER_NP;
 
 void *malloc(size_t len)

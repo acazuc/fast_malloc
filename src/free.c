@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 13:11:39 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:32:53 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:48:28 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 pthread_mutex_t g_malloc_mutex;
 
 static int check_page_type_large(void *addr, struct page_list *lst)

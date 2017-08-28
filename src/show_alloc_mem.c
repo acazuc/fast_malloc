@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/16 14:23:47 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:14:39 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:50:48 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 pthread_mutex_t g_malloc_mutex;
 /*
 static void print_block(size_t start, size_t end, size_t len)

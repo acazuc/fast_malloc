@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/09/27 10:38:52 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:22:18 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:48:03 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 
 static int is_page_free(struct page *page)
 {

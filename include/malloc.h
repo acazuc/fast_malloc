@@ -6,7 +6,7 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/02 16:26:43 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:42:46 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:54:37 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,8 +26,9 @@
 
 # define PAGE_SIZE 126
 
-# define TINY_SIZE 128
-# define SMALL_SIZE 1006
+# define TINY_SIZE 31
+# define SMALL_SIZE 128
+# define MEDIUM_SIZE 1006
 
 # define MALLOC_LOCK() pthread_mutex_lock(&g_malloc_mutex);
 # define MALLOC_UNLOCK() pthread_mutex_unlock(&g_malloc_mutex);
@@ -36,6 +37,7 @@ enum block_type
 {
 	TINY = 0,
 	SMALL,
+	MEDIUM,
 	LARGE
 };
 

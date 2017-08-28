@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/22 11:09:43 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/28 22:23:08 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:50:43 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 
 void remove_page(struct page_list *page, enum block_type type)
 {

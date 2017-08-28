@@ -6,13 +6,13 @@
 /*   By: acazuc <acazuc@student.42.fr>              +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2016/02/15 13:51:03 by acazuc            #+#    #+#             */
-/*   Updated: 2017/08/29 01:35:30 by acazuc           ###   ########.fr       */
+/*   Updated: 2017/08/29 01:51:14 by acazuc           ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "malloc.h"
 
-struct page_list *g_pages[3];
+struct page_list *g_pages[4];
 
 void *get_existing_block(enum block_type type)
 {
